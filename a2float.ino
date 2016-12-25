@@ -1,31 +1,18 @@
-
-long a2float(char* char_array, int len) {
-  Serial.print(F("a2float("));
+unsigned long a2ul(char* char_array, int len) {
+  Serial.print(F("a2ul("));
   for (int n=0; n<len; n++) { Serial.print(char_array[n]); }
-  Serial.print(F(","));
+  Serial.print(F(", "));
   Serial.print(len);
   Serial.println(F(")"));
   
   float res = 0;
-  int i=0;
-  int j=len-1;
-
-  char letter = char_array[i];
-  Serial.print("letter: "); Serial.println(letter);
   
-  if (NULL==letter) return NULL;
-
-  while (i<len) {
+  for (int i=0, j=len-1; i<len; i++, j--) {
     Serial.println(F(""));
+    Serial.print(F("i,j: ")); Serial.print(i); Serial.print(","); Serial.println(j);
     
-    Serial.print("i,j: "); Serial.print(i); Serial.print(","); Serial.println(j);
-
-    Serial.print("letter: "); Serial.println(letter);
-    
-    char* letter_ptr = new char(letter);
-    Serial.print("letter_ptr: "); Serial.println(*letter_ptr);
-    
-    int num = atoi(letter_ptr);
+    char* letter = new char(char_array[i]);
+    int num = atoi(letter);
     Serial.print("num: "); Serial.println(num);
     
     float decimal = pow(10,j);
@@ -36,32 +23,30 @@ long a2float(char* char_array, int len) {
 
     res += num_piece;
     Serial.print("res: "); Serial.println(res);
-
-    delete letter_ptr;
-
-    i++;
-    j--;
-    
-    char letter = char_array[i];
-    Serial.print("letter: "); Serial.println(letter);
-
-    if (NULL==letter) {
-      Serial.println(F("NULL characer reached"));
-      break;
-    }
   }
 
-  return res;
+  Serial.print(F("result to return: "));
+  Serial.println(res);
+  
+  return (unsigned long)(res);
+}
+
+unsigned long a2ul_short(char* char_array, int len) {
+  float res = 0;
+  for (int i=0, j=len-1; i<len; i++, j--) {
+    char* letter = new char(char_array[i]);
+    res += atoi(letter) * pow(10,j);
+  }
+  return (unsigned long)(res);
 }
 
 void setup() {
   Serial.begin(9600);
   Serial.println("=a2float=");
 
-  //Serial.println( a2float("532",3) );
-
-  Serial.println( long(32768.0) );
-  Serial.println( (unsigned long)(32768.0) );
+  Serial.println( a2ul("32711", 5) );
+  float a = 32711;
+  Serial.println( (unsigned long)(a) );
 }
 void loop() {
   // put your main code here, to run repeatedly:
