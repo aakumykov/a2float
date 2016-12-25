@@ -56,9 +56,7 @@ long a2float(char* char_array, int len) {
 
 void setup() {
   Serial.begin(9600);
-  Serial.println("=atoi-test=");
-
-  //Serial.println( long(5000.0) );
+  Serial.println("=a2float=");
 
   Serial.println( a2float("532",3) );
 }
