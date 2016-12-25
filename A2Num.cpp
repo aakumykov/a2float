@@ -25,16 +25,16 @@ static float A2Num::f(char* char_array, int len) {
   return res;
 }
 
-//static unsigned int A2Num::ui(char* char_array, int len) {
-//  float num = A2Num::f(char_array, len);
-//  return unsigned int(num);
-//}
+static unsigned int A2Num::ui(char* char_array, int len) {
+  float num = A2Num::f(char_array, len);
+  return (unsigned int)(num);
+}
 
 static long A2Num::l(char* char_array, int len) {
   return long( A2Num::f(char_array, len) );
 }
 
-//static unsigned long A2Num::ul(char* char_array, int len) {
-//  return unsigned long( A2Num::f(char_array, len) );
-//}
+static unsigned long A2Num::ul(char* char_array, int len) {
+  return (unsigned long)( A2Num::f(char_array, len) );
+}
 
