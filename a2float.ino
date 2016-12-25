@@ -1,4 +1,5 @@
 unsigned long a2ul(char* char_array, int len) {
+//float a2ul(char* char_array, int len) {
   Serial.print(F("a2ul("));
   for (int n=0; n<len; n++) { Serial.print(char_array[n]); }
   Serial.print(F(", "));
@@ -29,6 +30,7 @@ unsigned long a2ul(char* char_array, int len) {
   Serial.println(res);
   
   return (unsigned long)(res);
+//  return res;
 }
 
 unsigned long a2ul_short(char* char_array, int len) {
@@ -40,13 +42,19 @@ unsigned long a2ul_short(char* char_array, int len) {
   return (unsigned long)(res);
 }
 
+unsigned long qwerty(float a) {
+  return (unsigned long)(a);
+}
+
 void setup() {
   Serial.begin(9600);
   Serial.println("=a2float=");
 
-  Serial.println( a2ul("32711", 5) );
-  float a = 32711;
-  Serial.println( (unsigned long)(a) );
+  float a = a2ul("32711", 5);
+  Serial.println(a);
+  float b = 32711;
+  Serial.println( (unsigned long)(b) );
+  Serial.println( qwerty(b) );
 }
 void loop() {
   // put your main code here, to run repeatedly:
