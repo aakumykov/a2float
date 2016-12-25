@@ -1,25 +1,57 @@
 
-long a2long(char* char_array, int len) {
-  float res = 0;
+long a2float(char* char_array, int len) {
+  Serial.print(F("a2float("));
+  for (int n=0; n<len; n++) { Serial.print(char_array[n]); }
+  Serial.print(F(","));
+  Serial.print(len);
+  Serial.println(F(")"));
   
-  for (int i=0, j=len-1; i<len; i++, j--) {
-//    Serial.print("i,j: "); Serial.print(i); Serial.print(","); Serial.println(j);
+  float res = 0;
+  int i=0;
+  int j=len-1;
+
+  char letter = char_array[i];
+  Serial.print("letter: "); Serial.println(letter);
+  
+  if (NULL==letter) return NULL;
+
+  while (i<len) {
+    Serial.println(F(""));
     
-    char* letter = new char(char_array[i]);
-    int num = atoi(letter);
-//    Serial.print("num: "); Serial.println(num);
+    Serial.print("i,j: "); Serial.print(i); Serial.print(","); Serial.println(j);
+
+    Serial.print("letter: "); Serial.println(letter);
+    
+    char* letter_ptr = new char(letter);
+    Serial.print("letter_ptr: "); Serial.println(*letter_ptr);
+    
+    int num = atoi(letter_ptr);
+    Serial.print("num: "); Serial.println(num);
     
     float decimal = pow(10,j);
-//    Serial.print("decimal: "); Serial.println(decimal);
+    Serial.print("decimal: "); Serial.println(decimal);
     
     float num_piece = num * decimal;
-//    Serial.print("num_piece: "); Serial.println(num_piece);
+    Serial.print("num_piece: "); Serial.println(num_piece);
 
     res += num_piece;
-//    Serial.print("res: "); Serial.println(res);
+    Serial.print("res: "); Serial.println(res);
+
+    delete letter_ptr;
+
+    i++;
+    j--;
+    
+    char letter = char_array[i];
+    Serial.print("letter: "); Serial.println(letter);
+
+    if (NULL==letter) {
+      Serial.println(F("NULL characer reached"));
+      break;
+    }
   }
 
-  return long(res);
+  return res;
 }
 
 void setup() {
@@ -28,7 +60,7 @@ void setup() {
 
   //Serial.println( long(5000.0) );
 
-  Serial.println( a2long("532",3) );
+  Serial.println( a2float("532",3) );
 }
 void loop() {
   // put your main code here, to run repeatedly:
