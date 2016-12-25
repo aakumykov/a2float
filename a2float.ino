@@ -58,7 +58,10 @@ void setup() {
   Serial.begin(9600);
   Serial.println("=a2float=");
 
-  Serial.println( a2float("532",3) );
+  //Serial.println( a2float("532",3) );
+
+  Serial.println( long(32768.0) );
+  Serial.println( (unsigned long)(32768.0) );
 }
 void loop() {
   // put your main code here, to run repeatedly:
