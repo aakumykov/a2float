@@ -1,6 +1,8 @@
 #include "A2Num.h"
 
-long a2float(char* char_array, int len) {
+/*  Не понимает десятичной части, 
+float нужен лишь для математических операций. */
+static float A2Num::f(char* char_array, int len) {
   float res = 0;
   
   for (int i=0, j=len-1; i<len; i++, j--) {
@@ -23,13 +25,16 @@ long a2float(char* char_array, int len) {
   return res;
 }
 
-void setup() {
-  Serial.begin(9600);
-  Serial.println("=a2float=");
+//static unsigned int A2Num::ui(char* char_array, int len) {
+//  float num = A2Num::f(char_array, len);
+//  return unsigned int(num);
+//}
 
-  Serial.println( a2float("532",3) );
+static long A2Num::l(char* char_array, int len) {
+  return long( A2Num::f(char_array, len) );
 }
-void loop() {
-  // put your main code here, to run repeatedly:
 
-}
+//static unsigned long A2Num::ul(char* char_array, int len) {
+//  return unsigned long( A2Num::f(char_array, len) );
+//}
+
